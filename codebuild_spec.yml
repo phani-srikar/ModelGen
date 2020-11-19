@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  shell: /bin/sh
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+
+  pre_build:
+    commands:
+      - yarn config set workspaces-experimental true
+      - yarn cache clean --force
+
+  build:
+    commands:
+      - yarn run build
+      - yarn lint
+      - yarn test-ci
+      - yarn coverage
+
+cache:
+  paths:
+    - './node_modules/**/*'
