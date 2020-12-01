@@ -30,7 +30,9 @@ class PullRequestCodeBuilder(Project):
 
         trigger_on_pr = FilterGroup.in_event_of(EventAction.PULL_REQUEST_CREATED,
                                                 EventAction.PULL_REQUEST_UPDATED,
-                                                EventAction.PULL_REQUEST_MERGED).and_base_branch_is(base_branch)
+                                                EventAction.PULL_REQUEST_MERGED,
+                                                EventAction.PUSH,
+                                                EventAction.PULL_REQUEST_REOPENED)
 
         pr_codebuild_project = super().__init__(scope,
                                                 id,
