@@ -2,8 +2,6 @@ version: 0.2
 
 env:
   shell: /bin/sh
-  secrets-manager:
-    NPM_TOKEN: 'amplify-ops-npm-access-token'
 
 phases:
   install:
@@ -30,15 +28,7 @@ phases:
       - yarn coverage
     finally:
       - echo 'Build phase completed'
-  post_build:
-    commands:
-      - echo 'Post_build phase started'
-      - echo 'Authenticating with NPM'
-      - echo '//registry.npmjs.org/:_authToken=$NPM_TOKEN' > ~/.npmrc
-      - echo 'Publishing Amplify Codegen'
-      - npm run publish:release
-    finally:
-      - echo 'Post_build phase completed'
+      
 cache:
   paths:
     - './node_modules/**/*'
